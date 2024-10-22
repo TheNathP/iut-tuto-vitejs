@@ -1,0 +1,15 @@
+<div
+    class="relative aspect-video"
+    x-data="Slider([
+            'https://picsum.photos/900/400',
+            'https://picsum.photos/900/400?v=1',
+            'https://picsum.photos/900/400?v=2',
+            'https://picsum.photos/900/400?v=3'
+        ])"
+>
+    <template x-for="img in images">
+        <div class="absolute inset w-full" x-show="currentSlide === img.id">
+            <img :src="img.src" class="w-full" alt="">
+        </div>
+    </template>
+</div>
