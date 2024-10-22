@@ -13,10 +13,18 @@ export default function Slider(images) {
         },
 
         next() {
+            if (this.isLast()) {
+                this.currentSlide = 0;
+                return;
+            }
             this.currentSlide++;
         },
 
         prev() {
+            if (this.isFirst()) {
+                this.currentSlide = this.images.length - 1;
+                return;
+            }
             this.currentSlide--;
         },
 
