@@ -1,0 +1,35 @@
+<header
+    class="fixed md:relative md:flex shadow-lg md:shadow-none md:items-center w-full px-5 justify-between p-4"
+    :class="{'shadow-none' : menuOpen}"
+    x-data="{ menuOpen : false }"
+>
+    <div class="flex justify-between">
+        <div class="flex space-x-2 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 xl:size-10">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+            </svg>
+            <div class="xl:text-xl">Heyyy</div>
+        </div>
+        <div
+            class="flex space-x-2 md:hidden"
+            @click="menuOpen = ! menuOpen"
+        >
+            <div>Menu</div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25" />
+            </svg>
+        </div>
+    </div>
+    <div
+        class="py-4 md:py-0 transition absolute inset-x-0 top-[80px] w-full bg-white shadow-lg"
+        :class="{'-translate-y-full opacity-0 top-[-80px]': !menuOpen }"
+    >
+        <ul class="flex flex-col md:flex-row gap-4 py-4 text-center text-xl md:text-base xl:text-2xl xl:gap-x-8">
+            <li><a href="#top">Accueil</a></li>
+            <li><a href="#about">A propos</a></li>
+            <li><a href="#skills">Compétences</a></li>
+            <li><a href="#projects">Projets</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</header>
