@@ -8,8 +8,12 @@
         ])"
 >
     <template x-for="img in images">
-        <div class="absolute inset w-full" x-show="currentSlide === img.id">
-            <img :src="img.src" class="w-full" alt="">
+        <div class="absolute inset w-full h-full" x-show="currentSlide === img.id">
+            <img :src="img.src" class="w-full h-full object-cover" alt="">
         </div>
     </template>
+    <div class="absolute bottom-0 p-8 space-x-4 w-full flex justify-center z-30">
+        <button @click="prev()" class="bg-white p-4">Précédent</button>
+        <button @click="next()" class="bg-white p-4">Suivant</button>
+    </div>
 </div>
