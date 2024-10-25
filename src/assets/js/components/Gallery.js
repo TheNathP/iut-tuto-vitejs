@@ -26,9 +26,10 @@ export default function Gallery() {
         addOrRemoveFilter: function(tag) {
             if (this.isTagSelected(tag)) {
                 this.filterList = this.filterList.filter(filter => filter !== tag);
-                return;
+            } else {
+                this.filterList.push(tag);
             }
-            this.filterList.push(tag);
+            this.filterImages();
 
         },
 
@@ -50,6 +51,16 @@ export default function Gallery() {
                 });
             });
             return Array.from(categories);
+        },
+
+        filterImages: function() {
+            this.images = portfolio.filter(image => {
+                if (this.filterList.length === 0) {
+                    return true;
+                }
+                const imageCategories = new Set(image.category);
+                return this.filterList.every(tag => imageCategories.has(tag));
+            });
         },
     }
 }
