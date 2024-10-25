@@ -1,13 +1,18 @@
 <div class="my-12 md:my-24">
     <h2 class="text-xl md:text-4xl text-center font-bold">Portfolio</h2>
     <div
-            class="relative my-6 md:my-12"
+            class="relative my-4 md:my-12"
             x-data="Gallery()"
     >
 
-        <div class="flex justify-center gap-2 flex-wrap p-4">
+        <div class="flex justify-center gap-2 flex-wrap p-4 mb-4">
             <template x-for="tag in tags">
-                <span @click="addOrRemoveFilter(tag)" class="cursor-pointer bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold" :class="{ 'bg-gray-600 text-white' : isTagSelected(tag), 'bg-gray-100 text-gray-600' : !isTagSelected(tag) }" x-text="tag"></span>
+                <span
+                    @click="addOrRemoveFilter(tag)"
+                    class="bg-gray-100 rounded-full px-6 py-2 text-md font-semibold"
+                    :class="{ 'bg-gray-600 text-white' : isTagSelected(tag), 'bg-gray-100 text-gray-600' : !isTagSelected(tag), 'opacity-50 cursor-not-allowed' : !isTagAvailable(tag), 'cursor-pointer' : isTagAvailable(tag) }"
+                    x-text="tag">
+                </span>
             </template>
         </div>
 
