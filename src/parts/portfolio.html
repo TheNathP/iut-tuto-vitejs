@@ -19,10 +19,31 @@
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <template x-for="img in images">
-                <div>
+                <div @click="zoomImg(img.originalSrc)">
                     <img class="h-auto max-w-full rounded-lg" :src="img.src" alt="">
                 </div>
             </template>
+        </div>
+
+        <div
+                :class="{ '-translate-x-full' : !isZoomActive() }"
+        >
+            <div
+                class="bg-black/75 overflow-auto fixed inset-0 transition"
+                :class="{'opacity-0' : !isZoomActive(), 'opacity-100' : isZoomActive() }"
+            ></div>
+            <button
+                @click="closeZoom()"
+                class="fixed right-0 top-0 bg-white px-3 py-1 text-black"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <img class="fixed inset-1/2 -translate-x-1/2 -translate-y-1/2"
+                    :src="selectedImage"
+                    alt=""
+            />
         </div>
     </div>
 
