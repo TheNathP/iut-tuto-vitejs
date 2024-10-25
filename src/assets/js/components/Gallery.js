@@ -6,6 +6,7 @@ export default function Gallery() {
         tags: [],
         filterList: [],
         availableTags: new Set(),
+        selectedImage: null,
 
         init: function() {
             this.tags = this.getUniqueCategories(portfolio);
@@ -24,6 +25,18 @@ export default function Gallery() {
             }
             this.filterImages();
             this.updateAvailableTags();
+        },
+
+        isZoomActive() {
+            return this.selectedImage !== null;
+        },
+
+        closeZoom() {
+            this.selectedImage = null;
+        },
+
+        zoomImg(img) {
+            this.selectedImage = img;
         },
 
         isTagSelected: function(tag) {

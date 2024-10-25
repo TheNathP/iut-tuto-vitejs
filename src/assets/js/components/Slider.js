@@ -5,12 +5,10 @@ export default function Slider(images) {
 
         init() {
             for (let i = 0; i < images.length; i++) {
-                this.images.push({
-                    id: i,
-                    src: images[i].src,
-                    title: images[i].title,
-                    description: images[i].description,
-                });
+                this.images = images.map((image, index) => ({
+                    ...image,
+                    id: index
+                }));
             }
         },
 
