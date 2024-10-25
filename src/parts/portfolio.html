@@ -1,50 +1,82 @@
-<div class="my-12 md:my-24">
-    <h2 class="text-xl md:text-4xl text-center font-bold">Portfolio</h2>
+<div
+        x-data="{shown: false}"
+        x-intersect.margin.-200px="shown = true"
+>
     <div
-            class="relative my-4 md:my-12"
-            x-data="Gallery()"
+            class="my-12 md:my-24 relative z-20 transition duration-300"
+            :class="{'opacity-100': shown, 'opacity-0' : !shown}"
     >
-
-        <div class="flex justify-center gap-2 flex-wrap p-4 mb-4">
-            <template x-for="tag in tags">
-                <span
-                    @click="addOrRemoveFilter(tag)"
-                    class="bg-gray-100 rounded-full px-6 py-2 text-md font-semibold"
-                    :class="{ 'bg-gray-600 text-white' : isTagSelected(tag), 'bg-gray-100 text-gray-600' : !isTagSelected(tag), 'opacity-50 cursor-not-allowed' : !isTagAvailable(tag), 'cursor-pointer' : isTagAvailable(tag) }"
-                    x-text="tag">
-                </span>
-            </template>
-        </div>
-
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <template x-for="img in images">
-                <div @click="zoomImg(img.originalSrc)">
-                    <img class="h-auto max-w-full rounded-lg" :src="img.src" alt="">
-                </div>
-            </template>
-        </div>
-
+        <h2 class="text-xl md:text-4xl text-center font-bold">Portfolio</h2>
         <div
-                :class="{ '-translate-x-full' : !isZoomActive() }"
+                class="relative my-4 md:my-12"
+                x-data="Gallery()"
         >
-            <div
-                class="bg-black/75 overflow-auto fixed inset-0 transition"
-                :class="{'opacity-0' : !isZoomActive(), 'opacity-100' : isZoomActive() }"
-            ></div>
-            <button
-                @click="closeZoom()"
-                class="fixed right-0 top-0 bg-white px-3 py-1 text-black"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <img class="fixed inset-1/2 -translate-x-1/2 -translate-y-1/2"
-                    :src="selectedImage"
-                    alt=""
-            />
-        </div>
-    </div>
 
+            <div class="flex justify-center gap-2 flex-wrap p-4 mb-4">
+                <template x-for="tag in tags">
+                    <span
+                            @click="addOrRemoveFilter(tag)"
+                            class="bg-gray-100 rounded-full px-6 py-2 text-md font-semibold"
+                            :class="{ 'bg-gray-600 text-white' : isTagSelected(tag), 'bg-gray-100 text-gray-600' : !isTagSelected(tag), 'opacity-50 cursor-not-allowed' : !isTagAvailable(tag), 'cursor-pointer' : isTagAvailable(tag) }"
+                            x-text="tag">
+                    </span>
+                </template>
+            </div>
+
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <template x-for="img in images">
+                    <div @click="zoomImg(img.id)">
+                        <img class="h-auto max-w-full rounded-lg" :src="img.src" alt="">
+                    </div>
+                </template>
+            </div>
+
+            <div
+                    :class="{ '-translate-x-full' : !isZoomActive() }"
+            >
+                <div
+                        @click="closeZoom()"
+                        class="bg-black/75 overflow-auto fixed inset-0 transition"
+                        :class="{'opacity-0' : !isZoomActive(), 'opacity-100' : isZoomActive() }"
+                ></div>
+                <div x-show="isZoomActive()">
+                    <button
+                            @click="closeZoom()"
+                            class="fixed right-0 top-0 bg-white px-3 py-1 text-black"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-12">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                    <img class="fixed inset-1/2 -translate-x-1/2 -translate-y-1/2"
+                         :src="selectedImage"
+                         alt=""
+                    />
+                    <button
+                            @click="prevImage()"
+                            class="fixed top-1/2 -translate-y-1/2 left-0 bg-white px-3 py-1 text-black"
+                            :class="{ 'opacity-50' : !hasPrevImage() }"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-12">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+                        </svg>
+                    </button>
+                    <button
+                            @click="nextImage()"
+                            :class="{ 'opacity-50' : !hasNextImage() }"
+                            class="fixed top-1/2 -translate-y-1/2 right-0 bg-white px-3 py-1 text-black"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="size-12">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

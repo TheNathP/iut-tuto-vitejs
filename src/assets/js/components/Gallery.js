@@ -2,15 +2,21 @@ import portfolio from './../../../datas/portfolio.json';
 
 export default function Gallery() {
     return {
+        baseImages: [],
         images: [],
         tags: [],
         filterList: [],
         availableTags: new Set(),
         selectedImage: null,
+        selectedImageIndex: null,
 
         init: function() {
-            this.tags = this.getUniqueCategories(portfolio);
-            this.images = portfolio.slice(0, 8);
+            this.baseImages = portfolio.map((image, index) => ({
+                ...image,
+                id: index
+            }));
+            this.tags = this.getUniqueCategories(this.baseImages);
+            this.images = this.baseImages.slice(0, 8);
             this.availableTags = new Set(this.tags);
         },
 
@@ -35,8 +41,39 @@ export default function Gallery() {
             this.selectedImage = null;
         },
 
-        zoomImg(img) {
-            this.selectedImage = img;
+        zoomImg(imgId) {
+            this.selectedImage = this.images.find(item => item.id === imgId)?.originalSrc;
+            this.selectedImageIndex = imgId;
+        },
+
+        nextImage: function() {
+            if (!this.hasNextImage()) {
+                return;
+            }
+            this.selectedImageIndex++;
+
+            this.getImage();
+        },
+
+        prevImage: function() {
+            if (!this.hasPrevImage()) {
+                return;
+            }
+            this.selectedImageIndex--;
+
+            this.getImage();
+        },
+
+        getImage() {
+            this.selectedImage = this.images[this.selectedImageIndex].originalSrc;
+        },
+
+        hasPrevImage() {
+            return this.selectedImageIndex > 0;
+        },
+
+        hasNextImage() {
+            return this.selectedImageIndex < this.images.length - 1;
         },
 
         isTagSelected: function(tag) {
@@ -58,7 +95,7 @@ export default function Gallery() {
         },
 
         filterImages: function() {
-            this.images = portfolio.filter(image => {
+            this.images = this.baseImages.filter(image => {
                 if (this.filterList.length === 0) return true;
                 const imageCategories = new Set(image.category);
                 return this.filterList.every(tag => imageCategories.has(tag));
