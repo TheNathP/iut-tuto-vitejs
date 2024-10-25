@@ -1,0 +1,17 @@
+<div class="flex flex-col items-center"
+    x-data="{
+    text1: true,
+    text2: false,
+    text3: false
+}">
+    <div>
+        <button x-on:click="text1 = true; text2 = false; text3 = false">texte1</button>
+        <button x-on:click="text1 = false; text2 = true; text3 = false">texte2</button>
+        <button x-on:click="text1 = false; text2 = false; text3 = true">texte3</button>
+    </div>
+    <div>
+        <p x-show="text1">voici le texte 1</p>
+        <p x-show="text2">ceci est le texte 2</p>
+        <p x-show="text3">et ça c'est le 3</p>
+    </div>
+</div>
