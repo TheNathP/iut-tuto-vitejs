@@ -1,6 +1,9 @@
 import Alpine from 'alpinejs';
+import Slider from './components/Slider.js';
+import Gallery from './components/Gallery.js';
 
 window.Alpine = Alpine;
-document.addEventListener('DOMContentLoaded', () => {
-    Alpine.start();
-})
+
+Alpine.data('Slider', Slider);
+Alpine.data('Gallery', Gallery);
+Alpine.start();

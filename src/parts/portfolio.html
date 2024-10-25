@@ -1,0 +1,16 @@
+<div class="my-12 md:my-24">
+    <h2 class="text-xl md:text-4xl text-center font-bold">Portfolio</h2>
+    <div
+            class="relative my-6 md:my-12"
+            x-data="Gallery()"
+    >
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <template x-for="img in images">
+                <div>
+                    <img class="h-auto max-w-full rounded-lg" :src="img.src" alt="">
+                </div>
+            </template>
+        </div>
+    </div>
+
+</div>
