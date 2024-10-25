@@ -1,0 +1,50 @@
+<div x-data="{
+    activeTab: 1,
+    shown: false,
+    tabs: [
+        { id: 1, title: 'À propos de moi', content: 'Je suis un développeur web passionné, expert en technologies front-end et back-end. Je conçois des sites rapides, conviviaux et modernes, en utilisant des frameworks et des méthodologies de pointe.' },
+        { id: 2, title: 'Compétences', content: 'Compétent en PHP, Laravel, JavaScript (ES6+), Alpine.js, TailwindCSS, WordPress, et Vue.js. Mon travail respecte les standards de l\'industrie tels que PSR-12, avec un accent sur la scalabilité et la performance du code.' },
+        { id: 3, title: 'Projets', content: 'Voici quelques-uns de mes projets récents :<ul class=\'mt-2 space-y-1\'><li><strong>Pollen Framework :</strong> Un framework WordPress basé sur Laravel pour une gestion de contenu fluide.</li><li><strong>Piasa Auctions :</strong> Une plateforme de vente aux enchères en direct avec une structure multilingue et des fonctionnalités dynamiques de mise en enchères.</li><li><strong>Plugin Axeptio :</strong> Un outil conforme au RGPD pour la gestion du consentement des cookies, développé avec Alpine.js et TailwindCSS.</li></ul>' },
+        { id: 4, title: 'Blog', content: 'Restez informé de mes réflexions sur le développement web, des meilleures pratiques de codage aux tendances récentes des frameworks comme Laravel, WordPress et JavaScript.' },
+        { id: 5, title: 'Contact', content: 'Intéressé par une collaboration ? Discutons de comment nous pouvons travailler ensemble pour créer quelque chose d\'exceptionnel. Vous pouvez me contacter à <a href=\'mailto:contact@example.com\' class=\'text-indigo-500 hover:underline\'>contact@example.com</a>.' },
+    ]
+}"
+    x-intersect.margin.-200px="shown = true"
+>
+    <div class="mx-auto max-w-7xl transition duration-300" :class="{'opacity-100': shown, 'opacity-0' : !shown}">
+        <div class="sm:hidden px-4">
+            <label for="tabs" class="sr-only">Sélectionner un élément</label>
+            <select id="tabs" name="tabs" x-model="activeTab" @change="activeTab = parseInt($event.target.value)" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <template x-for="tab in tabs" :key="tab.id">
+                    <option :value="tab.id" x-text="tab.title"></option>
+                </template>
+            </select>
+        </div>
+
+        <div class="hidden sm:flex justify-center">
+            <nav class="flex space-x-4" aria-label="Tabs">
+                <template x-for="tab in tabs" :key="tab.id">
+                    <div @click="activeTab = tab.id" class="rounded-md px-3 py-2 text-sm font-medium text-gray-700"
+                         :class="{ 'bg-gray-100' : activeTab === tab.id, 'hover:text-gray-700' : activeTab !== tab.id }"
+                         x-text="tab.title"></div>
+                </template>
+            </nav>
+        </div>
+    </div>
+    <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-none">
+            <div class="overflow-hidden bg-white sm:rounded-lg sm:shadow">
+                <template x-for="tab in tabs" :key="tab.id">
+                    <div class="border-b border-gray-200 bg-white px-4 py-5 sm:px-6" x-show="activeTab === tab.id" x-transition>
+                        <div class="flex justify-between sm:flex-nowrap">
+                            <div>
+                                <h3 class="text-base font-semibold leading-6 text-gray-900" x-text="tab.title"></h3>
+                                <p class="mt-1 text-sm text-gray-500" x-html="tab.content"></p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</div>
