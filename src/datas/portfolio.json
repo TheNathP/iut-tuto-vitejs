@@ -16,7 +16,7 @@
   },
   {
     "title": "Développement d'un site événementiel",
-    "category": ["développement frontend", "backend", "AlpineJS"],
+    "category": ["frontend", "backend", "AlpineJS"],
     "src": "https://picsum.photos/400/400?random=4"
   },
   {
@@ -51,7 +51,7 @@
   },
   {
     "title": "Réalisation d'un site pour une agence de voyage",
-    "category": ["frontend", "tailored UI", "SEO"],
+    "category": ["frontend", "webdesign", "SEO"],
     "src": "https://picsum.photos/400/400?random=11"
   },
   {
@@ -61,7 +61,7 @@
   },
   {
     "title": "Design et développement d'un site de portfolio créatif",
-    "category": ["webdesign", "frontend", "interactivité"],
+    "category": ["webdesign", "frontend", "WordPress"],
     "src": "https://picsum.photos/400/400?random=13"
   },
   {
